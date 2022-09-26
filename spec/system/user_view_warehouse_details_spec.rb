@@ -10,7 +10,7 @@ describe 'Usuáro vê detalhes de um galpão' do
     w.save()
     
     # Act
-    visit(root_path)
+    visit root_path
     click_on 'Aeroporto SP'
                   
     
@@ -30,7 +30,7 @@ describe 'Usuáro vê detalhes de um galpão' do
     w.save()
 
     # Act
-    visit(root_path)
+    visit root_path
     click_on 'Aeroporto SP'
     click_on 'Voltar'
 
