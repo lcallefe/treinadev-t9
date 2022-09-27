@@ -4,10 +4,12 @@ pt-BR:
       supplier: 'Fornecedor'
     attributes:
       supplier:
-        corporate_name: 'Nome Fantasia'
-        brand_name: 'Razão Social'
+        corporate_name: 'Razão Social'
+        brand_name: 'Nome Fantasia'
         registration_number: 'CNPJ'
         state: 'Estado'
         full_address: 'Endereço'
         city: 'Cidade'
         email: 'E-mail'
+
+        

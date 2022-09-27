@@ -27,8 +27,8 @@ describe 'Usuário cadastra um fornecedor' do
     visit root_path
     click_on 'Fornecedores'
     click_on 'Cadastrar novo fornecedor'
-    fill_in 'Nome Fantasia', with: 'Perdigão S.A'
-    fill_in 'Razão Social', with: 'Perdigão'
+    fill_in 'Nome Fantasia', with: 'Perdigão'                      
+    fill_in 'Razão Social', with: 'Perdigão S.A'
     fill_in 'Endereço', with: 'Avenida José Martins da Costa, 134'
     fill_in 'Cidade', with: 'Embu das Artes'
     fill_in 'Estado', with: 'SP'
