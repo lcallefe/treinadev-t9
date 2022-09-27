@@ -5,7 +5,7 @@ pt-BR:
     attributes:
       supplier:
         corporate_name: 'Nome Fantasia'
-        brand_name: 'Marca'
+        brand_name: 'Razão Social'
         registration_number: 'CNPJ'
         state: 'Estado'
         full_address: 'Endereço'

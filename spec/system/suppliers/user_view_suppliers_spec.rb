@@ -4,7 +4,7 @@ describe 'Usuáro vê fornecedores' do
   it 'a partir da tela principal' do
     # Arrange
     s = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
-                         registration_number: '456789', state: 'SP', 
+                         registration_number: '6778075000107', state: 'SP', 
                          full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
                          email: 'contato@acme.com.br')
                         
@@ -19,7 +19,7 @@ describe 'Usuáro vê fornecedores' do
   it 'e volta para a tela inicial' do
     # Arrange
     s = Supplier.create!(corporate_name: 'CARGILL Alimentos', brand_name: 'CARGILL', 
-    registration_number: '234123', state: 'AM', 
+    registration_number: '7152226000118', state: 'AM', 
     full_address: 'Avenida Amazonas, 123', city: 'Manaus',
     email: 'contato@cargill.com.br')
 
