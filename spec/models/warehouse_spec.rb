@@ -16,8 +16,8 @@ RSpec.describe Warehouse, type: :model do
                                   cep: '25000-000', city: 'Rio', area: 1000,
                                   description: 'Alguma descrição')
         
-        expect(warehouse).not_to be_valid
-
+          expect(warehouse).not_to be_valid
+        end
       end
       it 'false when address is empty' do
         warehouse = Warehouse.new(name:'Rio de Janeiro', code: 'RIO', address: '',
@@ -44,9 +44,7 @@ RSpec.describe Warehouse, type: :model do
                                   cep: '25000-000', city: 'Rio', area: 1000,
                                   description: 'Alguma descrição')
         second_warehouse = Warehouse.new(name:'Angra dos Reis', code: 'RIO', address: 'Endereço',
-                                         cep: '25000-000', city: 'Rio', area: 2000,
-                                         description: 'Alguma descrição')
-
+                                         cep: '25000-000', city: 'Rio', area: 2000,                                         description: 'Alguma descrição')
         expect(second_warehouse).not_to be_valid
       end
     end
@@ -54,17 +52,14 @@ RSpec.describe Warehouse, type: :model do
       it 'false when CEP does not match "00000-000" format' do
         warehouse = Warehouse.new(name:'Angra dos Reis', code: 'RIO', address: 'Endereço',
                                   cep: '25000-0000', city: 'Rio', area: 2000,
-                                  description: 'Alguma descrição')
-                                  
-        expect(warehouse).not_to be_valid
+                                  description: 'Alguma descrição')                                            
+          expect(warehouse).not_to be_valid
       end
       it 'false when code does not match "AAA" format' do
         warehouse = Warehouse.new(name:'Angra dos Reis', code: 'ANGRA', address: 'Endereço',
                                   cep: '25000-0000', city: 'Rio', area: 2000,
-                                  description: 'Alguma descrição')
-                                  
+                                  description: 'Alguma descrição')                                                           
         expect(warehouse).not_to be_valid
       end
     end
   end
-end
