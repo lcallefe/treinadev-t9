@@ -87,7 +87,7 @@ RSpec.describe ProductModel, type: :model do
                              registration_number: '6778075000103', state: 'SP',
                              full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',
                              email: 'samsung@samsung.com.br')
-        product_model = ProductModel.new(name:'Jaboticaba', height:0, width:30, depth:20,
+        product_model = ProductModel.new(name:'Jaboticaba', height:-1, width:30, depth:20,
                                          weight:10, sku:'6778075000101', 
                                          supplier_id:s)                                                           
         expect(product_model).not_to be_valid
