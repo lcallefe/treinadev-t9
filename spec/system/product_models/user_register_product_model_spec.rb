@@ -16,7 +16,7 @@ describe 'Usuário cadastra um modelo de produto' do
   fill_in 'Altura', with: 60
   fill_in 'Largura', with: 90
   fill_in 'Profundidade', with: 10
-  fill_in 'SKU', with: 'TV 40 - ABC'
+  fill_in 'SKU', with: '67594032938291293847'
   select 'banana', from: 'Fornecedor'
   click_on 'Enviar'
 
@@ -24,7 +24,7 @@ describe 'Usuário cadastra um modelo de produto' do
 
   expect(page).to have_content 'Modelo de produto cadastrado com sucesso'
   expect(page).to have_content 'TV 40 Polegadas'
-  expect(page).to have_content 'TV 40 - ABC'
+  expect(page).to have_content '67594032938291293847'
   expect(page).to have_content 'Dimensão: 60cm x 90cm'
   expect(page).to have_content 'Peso: 10000g'
   expect(page).to have_content 'Fornecedor: banana'
