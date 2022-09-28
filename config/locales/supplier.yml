@@ -11,5 +11,6 @@ pt-BR:
         full_address: 'Endereço'
         city: 'Cidade'
         email: 'E-mail'
+        supplier_id: 'Fornecedor'
 
         
