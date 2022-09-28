@@ -12,6 +12,19 @@ class SuppliersController < ApplicationController
 
   end
 
+  def edit
+
+  end
+
+  def update
+    if @supplier.update(supplier_params)
+      redirect_to supplier_path(@supplier.id)
+    else
+      flash.now[:notice] = 'Não foi possível alterar fornecedor'
+      render 'edit'
+    end
+  end
+
   def create
     @supplier = Supplier.new(supplier_params)  
     if @supplier.save                                         

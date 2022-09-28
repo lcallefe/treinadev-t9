@@ -3,61 +3,75 @@ require 'rails_helper'
 describe 'Usuário edita um galpão' do
   it 'a partir da página de detalhes' do
     # Arrange
-    supplier = supplier.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_00,
-                                  address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
-                                  description: 'Galpão destinado para cargas internacionais')
+    s = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
+                         registration_number: '6778075000107', state: 'SP', 
+                         full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
+                         email: 'contato@acme.com.br')
     # Act
     visit root_path
-    click_on 'Aeroporto SP'
+    click_on 'Fornecedores'
+    click_on 'ACME'
     click_on 'Editar'
     # Assert
-    expect(page).to have_field('Nome',  with: 'Aeroporto SP')
-    expect(page).to have_field('Descrição', with: 'Galpão destinado para cargas internacionais')
-    expect(page).to have_field('Código', with: 'GRU')
+    expect(page).to have_field('Razão Social',  with: 'ACME LTDA')
+    expect(page).to have_field('Nome Fantasia', with: 'ACME')
+    expect(page).to have_field('CNPJ', with: '6778075000107')
+    expect(page).to have_field('Estado', with: 'SP')
     expect(page).to have_field('Endereço', with: 'Avenida do Aeroporto, 1000')
-    expect(page).to have_field('Cidade', with: 'Guarulhos')
-    expect(page).to have_field('CEP', with: '15000-000')
-    expect(page).to have_field('Área', with: '10000')
+    expect(page).to have_field('Cidade', with: 'Bauru')
+    expect(page).to have_field('Estado', with: 'SP')
+    expect(page).to have_field('E-mail', with: 'contato@acme.com.br')
   end
   it 'com sucesso' do
     # Arrange
-    supplier = supplier.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_00,
-                                  address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
-                                  description: 'Galpão destinado para cargas internacionais')
+    s = Supplier.create!(corporate_name: 'ACME', brand_name: 'Acme Market', 
+                         registration_number: '6778075000107', state: 'SP', 
+                         full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
+                         email: 'contato@acme.com.br')
 
     # Act
     visit root_path
-    click_on 'Aeroporto SP'
+    click_on 'Fornecedores'
+    click_on 'Acme Market'
     click_on 'Editar'
-    fill_in 'Nome', with: 'Galpão Internacional'
-    fill_in 'Área', with: '200000'
-    fill_in 'Endereço', with: 'Avenida dos Galpões, 500'
-    fill_in 'CEP', with: '16000-000'
+    fill_in 'Razão Social', with: 'ACME'
+    fill_in 'Nome Fantasia', with: 'Acme Market'
+    fill_in 'CNPJ', with: '1234567891234'
+    fill_in 'E-mail', with: 'contato@acmemarket.com'
     click_on 'Enviar'
     
     # Assert
-    expect(page).to have_content 'Nome: Galpão Internacional'
-    expect(page).to have_content 'Endereço: Avenida dos Galpões, 500'
-    expect(page).to have_content 'CEP: 16000-000'
-    expect(page).to have_content 'Área: 200000 m2'
+    expect(page).to have_content 'Fornecedor Acme Market'
+    expect(page).to have_content 'Documento:'
+    expect(page).to have_content '1234567891234' 
+    expect(page).to have_content 'Endereço:'
+    expect(page).to have_content 'Avenida do Aeroporto, 1000 - Bauru - SP'
+    expect(page).to have_content 'E-mail:'
+    expect(page).to have_content 'contato@acmemarket.com'
   end
 
   it 'e mantém os campos obrigatórios' do
     # Arrange
-    supplier = supplier.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_00,
-                                  address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
-                                  description: 'Galpão destinado para cargas internacionais')
+    s = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
+                         registration_number: '6778075000107', state: 'SP', 
+                         full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
+                         email: 'contato@acme.com.br')
+
     # Act
     visit root_path
-    click_on 'Aeroporto SP'
+    click_on 'Fornecedores'
+    click_on 'ACME'
     click_on 'Editar'
-    fill_in 'Nome', with: ''
-    fill_in 'Área', with: ''
-    fill_in 'Endereço', with: ''
-    fill_in 'CEP', with: ''
+    fill_in 'Razão Social', with: ''
+    fill_in 'Nome Fantasia', with: ''
+    fill_in 'CNPJ', with: ''
+    fill_in 'E-mail', with: ''
     click_on 'Enviar'
-
+    
     # Assert
-    expect(page).to have_content 'Não foi possível cadastrar o galpão'                                 
+    expect(page).to have_content ''
+    expect(page).to have_content ''
+    expect(page).to have_content ''
+    expect(page).to have_content ''                              
   end
 end
