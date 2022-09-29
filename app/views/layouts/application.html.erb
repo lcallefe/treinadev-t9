@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js></script>
     <title>WarehouseApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
       <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>  
-=  </head>
+  </head>
 
   <body>
       <header>
@@ -15,10 +16,16 @@
           <nav>
             <%= link_to 'Fornecedores', suppliers_path %>
             <%= link_to 'Modelos de Produtos', product_models_path %>
+            <% if user_signed_in? %>
+              <%= link_to 'Sair', root_path %>
+            <% else %>
+              <%= link_to 'Entrar', new_user_session_path %>
+            <% end %>
           </nav>
       </header>
       <main>
         <div>
+          <%= alert %>
           <%= notice %>
         </div>
       </main>
