@@ -2,12 +2,14 @@ require 'rails_helper'
 
 describe 'Usuário edita um galpão' do
   it 'a partir da página de detalhes' do
-    # Arrange
+    # Arrange 
+    user = User.create!(email: 'luciana@gmail.com', password: 'password')
     s = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
                          registration_number: '6778075000107', state: 'SP', 
                          full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
                          email: 'contato@acme.com.br')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'ACME'
@@ -23,13 +25,15 @@ describe 'Usuário edita um galpão' do
     expect(page).to have_field('E-mail', with: 'contato@acme.com.br')
   end
   it 'com sucesso' do
-    # Arrange
+    # Arrange 
+    user = User.create!(email: 'luciana@gmail.com', password: 'password')
     s = Supplier.create!(corporate_name: 'ACME', brand_name: 'Acme Market', 
                          registration_number: '6778075000107', state: 'SP', 
                          full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
                          email: 'contato@acme.com.br')
 
     # Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Acme Market'
@@ -51,13 +55,15 @@ describe 'Usuário edita um galpão' do
   end
 
   it 'e mantém os campos obrigatórios' do
-    # Arrange
+    # Arrange 
+    user = User.create!(email: 'luciana@gmail.com', password: 'password')
     s = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
                          registration_number: '6778075000107', state: 'SP', 
                          full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
                          email: 'contato@acme.com.br')
 
     # Act
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'ACME'

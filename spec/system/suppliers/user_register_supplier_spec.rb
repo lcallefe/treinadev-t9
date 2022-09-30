@@ -2,11 +2,13 @@ require 'rails_helper'
 
 describe 'Usuário cadastra um fornecedor' do
   it 'a partir da tela de fornecedores' do
-    # Arrange
+    # Arrange 
+    user = User.create!(email: 'luciana@gmail.com', password: 'password')
 
 
     # Act
     visit root_path
+    login_as(user)
     click_on 'Fornecedores'
     click_on 'Cadastrar novo fornecedor'
 
@@ -21,10 +23,12 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com sucesso' do
-    # Arrange
+    # Arrange 
+    user = User.create!(email: 'luciana@gmail.com', password: 'password')
 
     # Act
     visit root_path
+    login_as(user)
     click_on 'Fornecedores'
     click_on 'Cadastrar novo fornecedor'
     fill_in 'Nome Fantasia', with: 'Perdigão'                      
@@ -43,11 +47,13 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com dados incompletos' do
-    # Arrange
+    # Arrange 
+    user = User.create!(email: 'luciana@gmail.com', password: 'password')
 
     # Act
     
     visit root_path
+    login_as(user)
     click_on 'Fornecedores'
     click_on 'Cadastrar novo fornecedor'
     fill_in 'Nome Fantasia', with: ''

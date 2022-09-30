@@ -1,12 +1,24 @@
 require 'rails_helper'
 
 describe 'Usuário vê modelos de produtos' do
+  it 'se estiver autenticado' do
+    # Arrange
+
+    # Act
+      visit root_path
+      within('nav') do
+        click_on 'Modelos de Produtos'
+      end
+    # Assert
+    expect(current_path).to eq new_user_session_path
+  end
   it 'a partir do menu' do
     # Arrange
 
-
+    user = User.create!(name: "Luciana", email: 'luciana@gmail.com', password: 'password')
     # Act
     visit root_path 
+    login_as(user)
     within('nav') do
       click_on 'Modelos de Produtos'
     end
@@ -19,6 +31,8 @@ describe 'Usuário vê modelos de produtos' do
   it 'com sucesso' do
 
     # Arrange
+    user = User.create!(name: "Luciana", email: 'luciana@gmail.com', password: 'password')
+
     supplier = Supplier.create!(brand_name:'Samsung', corporate_name: 'Samsung Eletrônicos',
                                 registration_number:'2345678901234', full_address: 'Av Nacoes Unidas, 1000',
                                 city: 'São Paulo', state: 'SP', email: 'sac@samsung.com')
@@ -28,6 +42,7 @@ describe 'Usuário vê modelos de produtos' do
                           sku: '67594021938291293847', supplier:supplier)
 
     # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Modelos de Produtos'
@@ -44,8 +59,9 @@ describe 'Usuário vê modelos de produtos' do
 
   it 'e não existem produtos cadastrados' do
     # Arrange
-
+    user = User.create!(name: "Luciana", email: 'luciana@gmail.com', password: 'password')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
 

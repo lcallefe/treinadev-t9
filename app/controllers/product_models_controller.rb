@@ -1,5 +1,4 @@
 class ProductModelsController < ApplicationController
-
   def index
     @product_models = ProductModel.all
   end
@@ -18,7 +17,8 @@ class ProductModelsController < ApplicationController
       redirect_to @product_model, notice: 'Modelo de produto cadastrado com sucesso'
     else  
       @suppliers = Supplier.all
-      flash.now[:notice] = 'Não foi possível cadastrar o modelo de produto'
+      flash.now[:notice] = 'Não foi possível cadastrar o modelo de produto.'
+      render 'new'
     end
   end
 
