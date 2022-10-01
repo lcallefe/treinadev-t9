@@ -1,0 +1,14 @@
+pt-BR:   
+  activerecord:
+    models: 
+      order: 'Modelo de Produto'
+    attributes:
+      order:
+        warehouse: 'Galpão Destino'
+        warehouse_id: 'Galpão Destino'
+        supplier: 'Fornecedor'
+        supplier_id: 'Fornecedor'
+        estimated_delivery_date: 'Data Prevista de Entrega'
+ 
+
+

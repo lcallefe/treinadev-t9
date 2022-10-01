@@ -1,9 +1,9 @@
-Galpão <%= @warehouse.code %>
+<%= Warehouse.model_name.human%> <%= @warehouse.code %>
 <%= @warehouse.code %>
-Nome: <%= @warehouse.name %>
-Cidade: <%= @warehouse.city %>
-Área: <%= @warehouse.area %> m2
-Endereço: <%= @warehouse.address %> CEP: <%= @warehouse.cep %>
+<%= Warehouse.human_attribute_name(:name) %>: <%= @warehouse.name %>
+<%= Warehouse.human_attribute_name(:city)%>: <%= @warehouse.city %>
+<%= Warehouse.human_attribute_name(:area)%>: <%= @warehouse.area %> m2
+<%= Warehouse.human_attribute_name(:address)%>: <%= @warehouse.address %> <%=Warehouse.human_attribute_name(:cep)%>: <%= @warehouse.cep %>
 <%= @warehouse.description %>
 
 <div>

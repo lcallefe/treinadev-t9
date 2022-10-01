@@ -12,5 +12,6 @@ pt-BR:
         sku: 'SKU'
         supplier_id: 'Fornecedor'
         supplier: 'Fornecedor'
+        dimension: 'Dimensão'
 
 

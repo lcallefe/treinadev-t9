@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário edita um galpão' do
+describe 'Usuário edita um fornecedor' do
   it 'a partir da página de detalhes' do
     # Arrange 
     user = User.create!(email: 'luciana@gmail.com', password: 'password')
@@ -46,7 +46,7 @@ describe 'Usuário edita um galpão' do
     
     # Assert
     expect(page).to have_content 'Fornecedor Acme Market'
-    expect(page).to have_content 'Documento:'
+    expect(page).to have_content 'CNPJ:'
     expect(page).to have_content '1234567891234' 
     expect(page).to have_content 'Endereço:'
     expect(page).to have_content 'Avenida do Aeroporto, 1000 - Bauru - SP'
