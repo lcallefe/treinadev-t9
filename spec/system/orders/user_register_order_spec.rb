@@ -19,7 +19,7 @@ describe 'Usuário cadastra um pedido' do
     Supplier.create!(corporate_name: 'eletrônicos', brand_name: 'banana', 
                      registration_number: '6778075000103', state: 'SP',
                      full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',
-                     email: 'samsung@samsung.com.br')        
+                     email: 'samsung@samsung.com.br')  
 
     # Act
     login_as(user)
@@ -31,6 +31,7 @@ describe 'Usuário cadastra um pedido' do
     click_on 'Gravar'
 
     # Assert
+    expect(page).to have_content 'Pedido registrado com sucesso.'
     expect(page).to have_content 'Galpão Destino: GRU - Aeroporto SP'
     expect(page).to have_content 'Fornecedor: ACME LTDA'
     expect(page).to have_content 'Usuário responsável: Sergio - sergio@gmail.com'

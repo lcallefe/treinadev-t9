@@ -20,16 +20,15 @@ describe 'Usuário edita um pedido' do
                       area: 100_000, address: 'Avenida do Aeroporto, 100', 
                       cep: '15000-000', description: 'Galpão destinado para cargas 
                                                                               internacionais')                                                                         
-    code = Array.new(20){[*"A".."Z",*"0".."9"].sample}.join
-    Order.create!(warehouse_id: warehouse.id, supplier_id: supplier.id, 
-                  estimated_delivery_date: "#{Date.today+1}", user_id: user.id, 
-                  order_code:code)
-    date = I18n.localize(Date.today+5)
+    order = Order.new(warehouse: warehouse, supplier: supplier, 
+                  estimated_delivery_date: Date.today+1, user: user)
     
+    date = Date.today+5
     # Act
+    order.save!
     login_as(user)
     visit orders_path
-    click_on "#{code}"
+    click_on "#{order.order_code}"
     click_on 'Editar'
     select 'GRH - Aeroporto BH', from: 'Galpão Destino'
     select 'ACME - MG', from: 'Fornecedor'
@@ -41,7 +40,7 @@ describe 'Usuário edita um pedido' do
     expect(page).to have_content 'Galpão Destino: GRH - Aeroporto BH'
     expect(page).to have_content 'Fornecedor: ACME LTDA'
     expect(page).to have_content 'Usuário responsável: Luciana - luciana@gmail.com'
-    expect(page).to have_content "Data Prevista de Entrega: #{date}"
+    expect(page).to have_content "Data Prevista de Entrega: #{I18n.localize(date)}"
     expect(page).not_to have_content 'Cadastre-se ou faça login para visualizar este pedido.'
   end
   it 'e não está autorizado' do
@@ -56,17 +55,16 @@ describe 'Usuário edita um pedido' do
                                   area: 100_000, address: 'Avenida do Aeroporto, 100', 
                                   cep: '15000-000', description: 'Galpão destinado para cargas 
                                   internacionais')
-    code = Array.new(20){[*"A".."Z",*"0".."9"].sample}.join
-    Order.create!(warehouse_id: warehouse.id, supplier_id: supplier.id, 
-                  estimated_delivery_date: "#{Date.today+1}", user_id: user.id, 
-                  order_code:code)
+    order = Order.new(warehouse: warehouse, supplier: supplier, 
+                  estimated_delivery_date: Date.today+1, user: user)
 
     
     # Act
+    order.save!
     login_as(other_user)
     visit root_path
     click_on 'Ver pedidos'
-    click_on "#{code}"
+    click_on "#{order.order_code}"
 
     # Assert
     expect(page).to have_content('Cadastre-se ou faça login para visualizar este pedido.')

@@ -20,7 +20,7 @@ class WarehousesController < ApplicationController
 
   def update
     if @warehouse.update(warehouse_params)
-      redirect_to warehouse_path(@warehouse.id)
+      redirect_to warehouse_path(@warehouse)
     else
       flash.now[:notice] = 'Não foi possível cadastrar o galpão'
       render 'edit'

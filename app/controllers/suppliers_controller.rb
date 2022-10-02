@@ -18,7 +18,7 @@ class SuppliersController < ApplicationController
 
   def update
     if @supplier.update(supplier_params)
-      redirect_to supplier_path(@supplier.id)
+      redirect_to supplier_path(@supplier)
     else
       flash.now[:notice] = 'Não foi possível alterar fornecedor'
       render 'edit'

@@ -27,7 +27,6 @@ class OrdersController < ApplicationController
     order_params
     @order = Order.new(order_params)
     @order.user = current_user
-    @order.order_code = Array.new(20){[*"A".."Z",*"0".."9"].sample}.join
 
     if @order.save
       redirect_to @order, notice: "Pedido registrado com sucesso."

@@ -12,19 +12,13 @@ describe 'Usuáro vê pedidos' do
                                   area: 100_000, address: 'Avenida do Aeroporto, 100', 
                                   cep: '15000-000', description: 'Galpão destinado para cargas 
                                   internacionais')
-    code_first_order = Array.new(20){[*"A".."Z",*"0".."9"].sample}.join
-    code_second_order = Array.new(20){[*"A".."Z",*"0".."9"].sample}.join
-    code_third_order = Array.new(20){[*"A".."Z",*"0".."9"].sample}.join
 
-    first = Order.create!(warehouse_id: warehouse.id, supplier_id: supplier.id, 
-                  estimated_delivery_date: Date.today+1, user_id: user.id, 
-                  order_code:"#{code_first_order}")
-    second = Order.create!(warehouse_id: warehouse.id, supplier_id: supplier.id, 
-                  estimated_delivery_date: Date.today+2, user_id: user.id, 
-                  order_code:"#{code_second_order}")
-    third = Order.create!(warehouse_id: warehouse.id, supplier_id: supplier.id, 
-                  estimated_delivery_date: Date.today+1, user_id: user.id, 
-                  order_code:"#{code_third_order}")
+    first = Order.new(warehouse_id: warehouse, supplier_id: supplier, 
+                  estimated_delivery_date: Date.today+1, user_id: user)
+    second = Order.new(warehouse_id: warehouse, supplier_id: supplier, 
+                  estimated_delivery_date: Date.today+2, user_id: user)
+    third = Order.new(warehouse_id: warehouse, supplier_id: supplier, 
+                  estimated_delivery_date: Date.today+1, user_id: user)
 
     # Act
     visit root_path
@@ -32,9 +26,9 @@ describe 'Usuáro vê pedidos' do
     click_on 'Ver pedidos'
    
     # Assert
-    expect(page).to have_content("#{code_first_order}")
-    expect(page).to have_content("#{code_second_order}")
-    expect(page).to have_content("#{code_third_order}")
+    expect(page).to have_content(first.order_code)
+    expect(page).to have_content(second.order_code)
+    expect(page).to have_content(third.order_code)
   end
   it 'e volta para a tela inicial' do
         # Arrange 
@@ -47,11 +41,9 @@ describe 'Usuáro vê pedidos' do
                                   area: 100_000, address: 'Avenida do Aeroporto, 100', 
                                   cep: '15000-000', description: 'Galpão destinado para cargas 
                                   internacionais')
-    code = Array.new(20){[*"A".."Z",*"0".."9"].sample}.join
-
-    Order.create!(warehouse_id: warehouse.id, supplier_id: supplier.id, 
-                  estimated_delivery_date: Date.today+1, user_id: user.id, 
-                  order_code:"#{code}")
+ 
+    Order.create(warehouse_id: warehouse, supplier_id: supplier, 
+                  estimated_delivery_date: Date.today+1, user_id: user)
   
     # Act
     visit root_path
