@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Supplier, type: :model do
   describe '#valid?' do
     context 'presence' do
-      it 'false when corporate name is empty' do
+      it 'falso quando razão social está vazio' do
         supplier = Supplier.new(corporate_name:'', brand_name:'blabla', 
                                 registration_number:'1234567898765', state:'MG',
                                 full_address:'Rua Laranja,43', city:'São Thomé das Letras', 
@@ -12,7 +12,7 @@ RSpec.describe Supplier, type: :model do
         expect(supplier).not_to be_valid
       end
       
-      it 'false when email is empty' do
+      it 'falso quando email está vazio' do
         supplier = Supplier.new(corporate_name:'blablabla', brand_name:'blabla2', 
                                 registration_number:'1234567898765', state:'MG',
                                 full_address:'Rua Tangerina, 43', city:'São Thomé das Letras', 
@@ -20,7 +20,7 @@ RSpec.describe Supplier, type: :model do
         
           expect(supplier).not_to be_valid
       end
-      it 'false when registration_number is empty' do
+      it 'falso quando CNPJ está vazio' do
         supplier = Supplier.new(corporate_name:'blablabla', brand_name:'blabla2', 
                                 registration_number:'', state:'MG',
                                 full_address:'Rua Goiaba, 32', city:'São Thomé das Letras', 
@@ -30,7 +30,7 @@ RSpec.describe Supplier, type: :model do
       end
     end
     context 'uniqueness' do
-      it 'false when registraton number is already in use' do
+      it 'falso quando CNPJ já está em uso' do
         supplier = Supplier.create!(corporate_name:'blablabla', brand_name:'blabla2', 
                                     registration_number:'1239086438923', state:'MG',
                                     full_address:'Rua Abacaxi, 67', city:'São Thomé das Letras', 
@@ -45,7 +45,7 @@ RSpec.describe Supplier, type: :model do
       end
     end
     context 'length' do
-      it 'false when registration number is less than 13" format' do
+      it 'falso quando tamanho do CNPJ é maior que 13" format' do
         supplier = Supplier.new(corporate_name:'blablabla', brand_name:'blabla2', 
                                 registration_number:'57483', state:'MG',
                                 full_address:'Rua Morango,897', 

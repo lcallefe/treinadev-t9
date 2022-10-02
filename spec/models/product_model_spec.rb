@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ProductModel, type: :model do
   describe '#valid?' do
     context 'presence' do
-      it 'false when name is empty' do
+      it 'falso quando nome está em branco' do
         s = Supplier.create!(corporate_name: 'eletrônicos', brand_name: 'banana', 
                             registration_number: '6778075000103', state: 'SP',
                             full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',
@@ -15,7 +15,7 @@ RSpec.describe ProductModel, type: :model do
         expect(product_model).not_to be_valid
       end
       
-      it 'false when sku is empty' do
+      it 'falso quando sku está em branco' do
         s = Supplier.create!(corporate_name: 'eletrônicos', brand_name: 'banana', 
                             registration_number: '6778075000103', state: 'SP',
                             full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',
@@ -28,7 +28,7 @@ RSpec.describe ProductModel, type: :model do
           expect(product_model).not_to be_valid
         end
       end
-      it 'false when weight is empty' do
+      it 'falso quando peso está em branco' do
         s = Supplier.create!(corporate_name: 'eletrônicos', brand_name: 'banana', 
                              registration_number: '6778075000103', state: 'SP',
                              full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',
@@ -41,7 +41,7 @@ RSpec.describe ProductModel, type: :model do
       end
     end
     context 'uniqueness' do
-      it 'false when sku is already in use' do
+      it 'falso quando sku já está em uso' do
         s = Supplier.create!(corporate_name: 'eletrônicos', brand_name: 'banana', 
                              registration_number: '6778075000103', state: 'SP',
                              full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',
@@ -62,7 +62,7 @@ RSpec.describe ProductModel, type: :model do
       end
     end
     context 'length' do
-      it 'sku length must be equal to 20' do
+      it 'tamanho do sku deve ser igual a 20' do
         s = Supplier.create!(corporate_name: 'eletrônicos', brand_name: 'banana', 
                              registration_number: '6778075000103', state: 'SP',
                              full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',
@@ -72,7 +72,7 @@ RSpec.describe ProductModel, type: :model do
                                          supplier_id:s)                                           
         expect(product_model).not_to be_valid
       end
-      it 'weight must be greater than 0' do
+      it 'peso deve ser maior ou igual a 0' do
         s = Supplier.create!(corporate_name: 'eletrônicos', brand_name: 'banana', 
                              registration_number: '6778075000103', state: 'SP',
                              full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',
@@ -82,7 +82,7 @@ RSpec.describe ProductModel, type: :model do
                                          supplier_id:s)                                                           
         expect(product_model).not_to be_valid
       end
-      it 'height must be greater than 0'do
+      it 'altura deve ser maior ou igual a 0'do
         s = Supplier.create!(corporate_name: 'eletrônicos', brand_name: 'banana', 
                              registration_number: '6778075000103', state: 'SP',
                              full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',
@@ -92,7 +92,7 @@ RSpec.describe ProductModel, type: :model do
                                          supplier_id:s)                                                           
         expect(product_model).not_to be_valid
       end
-      it 'width must be greater than 0'do
+      it 'largura deve ser maior ou igual a 0'do
       s = Supplier.create!(corporate_name: 'eletrônicos', brand_name: 'banana', 
                            registration_number: '6778075000103', state: 'SP',
                            full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',
