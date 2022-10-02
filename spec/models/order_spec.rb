@@ -3,48 +3,42 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   describe '#valid?' do
     context 'presence' do    
-      it 'falso quando fornecedor é nulo' do
-        user = User.create!(name: 'Sergio', email: 'sergio@gmail.com', password: '12345678')
-        warehouse = Warehouse.create!(name: 'Galpão Brazil', code: 'BRA', city: 'Goiânia',
-                                       area: 100_000, address: 'Avenida Marechal Deodoro, 100', 
-                                       cep: '15000-000', description: 'Galpão destinado para cargas 
-                                      internacionais')
-
-        order = Order.new(warehouse_id: warehouse, supplier_id: nil, 
-                              estimated_delivery_date: Date.today+1, user_id: user)
-                     
-        expect(order).not_to be_valid
+      it 'falso quando fornecedor é vazio' do
+        # Arrange
+        order = Order.new(supplier: nil)
+        # Act
+        order.valid?
+        # Assert
+        expect(order.errors.include?(:supplier)).to be true  
+        expect(order.errors[:supplier]).to include("é obrigatório(a)")
       end
     end
-      it 'falso quando galpão é nulo' do
-        user = User.create!(name: 'Sergio', email: 'sergio@gmail.com', password: '12345678')
-
-        supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
-                                    registration_number: '6778075000107', state: 'SP', 
-                                    full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
-                                    email: 'contato@acme.com.br')
-
-        order = Order.new(warehouse_id: nil, supplier_id: supplier, 
-                              estimated_delivery_date: "#{Date.today+1}", user_id: user)
-                     
-        expect(order).not_to be_valid
+      it 'falso quando galpão é vazio' do
+        # Arrange
+        order = Order.new(warehouse: nil)
+        # Act
+        order.valid?
+        # Assert
+        expect(order.errors.include?(:warehouse)).to be true 
+        expect(order.errors[:warehouse]).to include("é obrigatório(a)")        
       end
       it 'falso quando data estimada de entrega está em branco' do
-        user = User.create!(name: 'Sergio', email: 'sergio@gmail.com', password: '12345678')
-
-        supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
-                                    registration_number: '6778075000107', state: 'SP', 
-                                    full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
-                                    email: 'contato@acme.com.br')
-        warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos',
-                                      area: 100_000, address: 'Avenida do Aeroporto, 100', 
-                                      cep: '15000-000', description: 'Galpão destinado para cargas 
-                                      internacionais')
-
-        order = Order.new(warehouse_id: warehouse, supplier_id: supplier, 
-                              estimated_delivery_date: "mm/dd/yyyy", user_id: user)
-                     
-        expect(order).not_to be_valid
+        # Arrange
+        order = Order.new(estimated_delivery_date: '')
+        # Act
+        order.valid?
+        # Assert
+        expect(order.errors.include?(:estimated_delivery_date)).to be true  
+        expect(order.errors[:estimated_delivery_date]).to include("deve ser preenchida e estar no formato dd/mm/yyyy.")
+      end
+      it 'falso quando data estimada de entrega está no passado' do
+        # Arrange
+        order = Order.new(estimated_delivery_date: 1.day.ago)
+        # Act
+        order.valid?
+        # Assert
+        expect(order.errors.include?(:estimated_delivery_date)).to be true         
+        expect(order.errors[:estimated_delivery_date]).to include("deve ser uma data futura.")
       end
     end
     it 'deve ter um código' do
@@ -55,7 +49,7 @@ RSpec.describe Order, type: :model do
                                     description: 'Alguma descrição')
       supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number:'1234567890123',
                                   email: 'contato@acme.com', full_address: 'Av das Palmas, 123', city: 'Bauru', state: 'SP')
-      order = Order.new(user:user, warehouse:warehouse, supplier: supplier, estimated_delivery_date: Date.today+1) 
+      order = Order.new(user:user, warehouse:warehouse, supplier: supplier, estimated_delivery_date: 1.day.from_now) 
       # Act
       result = order.valid?
       # Assert
@@ -69,15 +63,14 @@ RSpec.describe Order, type: :model do
                                       city: 'Rio', area: 1000, description: 'Alguma descrição')
         supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number:'1234567890123',
                                     email: 'contato@acme.com', full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP')
-        order = Order.new(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: Date.today+1)
+        order = Order.new(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.day.from_now)
 
         # Act
         order.save!
-        result = order.order_code
 
         # Assert
-        expect(result).not_to be_empty
-        expect(result.length).to eq 8
+        expect(order.order_code).not_to be_empty
+        expect(order.order_code.length).to eq 8
       end
       it 'e o código é único' do
         # Arrange
