@@ -4,4 +4,5 @@ class ProductModel < ApplicationRecord
   validates :sku, uniqueness: true
   validates :sku, length: { is: 20 }
   validates :weight, :width, :height, comparison: { greater_than_or_equal_to: 0 }
+
 end

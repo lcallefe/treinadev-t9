@@ -62,7 +62,7 @@ RSpec.describe ProductModel, type: :model do
       end
     end
     context 'length' do
-      it 'sku must be equal to 20' do
+      it 'sku length must be equal to 20' do
         s = Supplier.create!(corporate_name: 'eletrônicos', brand_name: 'banana', 
                              registration_number: '6778075000103', state: 'SP',
                              full_address: 'Avenida do Aeroporto, 1000', city: 'Diadema',

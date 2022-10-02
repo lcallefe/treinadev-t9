@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'Usuário edita um fornecedor' do
   it 'a partir da página de detalhes' do
     # Arrange 
-    user = User.create!(email: 'luciana@gmail.com', password: 'password')
-    s = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
+    user = User.create!(email: 'luciana@gmail.com', password: 'password', name: 'luciana')
+    supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
                          registration_number: '6778075000107', state: 'SP', 
                          full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
                          email: 'contato@acme.com.br')
@@ -27,7 +27,7 @@ describe 'Usuário edita um fornecedor' do
   it 'com sucesso' do
     # Arrange 
     user = User.create!(email: 'luciana@gmail.com', password: 'password')
-    s = Supplier.create!(corporate_name: 'ACME', brand_name: 'Acme Market', 
+    supplier = Supplier.create!(corporate_name: 'ACME', brand_name: 'Acme Market', 
                          registration_number: '6778075000107', state: 'SP', 
                          full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
                          email: 'contato@acme.com.br')
@@ -57,7 +57,7 @@ describe 'Usuário edita um fornecedor' do
   it 'e mantém os campos obrigatórios' do
     # Arrange 
     user = User.create!(email: 'luciana@gmail.com', password: 'password')
-    s = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
+    supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
                          registration_number: '6778075000107', state: 'SP', 
                          full_address: 'Avenida do Aeroporto, 1000', city: 'Bauru',
                          email: 'contato@acme.com.br')

@@ -1,0 +1,9 @@
+<h1>Pedidos</h1>
+
+<%if @orders.any?%>
+  <% @orders.each_with_index do |order|%>
+    <p><%= link_to order.order_code, order %></p>
+  <% end %>
+<% else %>
+  <p>Nenhum modelo de produto cadastrado</p>
+<% end %>
