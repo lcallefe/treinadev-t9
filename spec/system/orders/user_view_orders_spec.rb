@@ -14,11 +14,11 @@ describe 'Usuáro vê pedidos' do
                                   internacionais')
 
     first = Order.new(warehouse_id: warehouse, supplier_id: supplier, 
-                  estimated_delivery_date: Date.today+1, user_id: user)
+                  estimated_delivery_date: 1.day.from_now, user_id: user)
     second = Order.new(warehouse_id: warehouse, supplier_id: supplier, 
-                  estimated_delivery_date: Date.today+2, user_id: user)
+                  estimated_delivery_date: 2.days.from_now, user_id: user)
     third = Order.new(warehouse_id: warehouse, supplier_id: supplier, 
-                  estimated_delivery_date: Date.today+1, user_id: user)
+                  estimated_delivery_date: 1.day.from_now, user_id: user)
 
     # Act
     visit root_path
@@ -43,7 +43,7 @@ describe 'Usuáro vê pedidos' do
                                   internacionais')
  
     Order.create(warehouse_id: warehouse, supplier_id: supplier, 
-                  estimated_delivery_date: Date.today+1, user_id: user)
+                  estimated_delivery_date: 1.day.from_now, user_id: user)
   
     # Act
     visit root_path

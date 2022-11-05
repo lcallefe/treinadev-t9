@@ -5,4 +5,10 @@ Rails.application.routes.draw do
   resources :suppliers, only: [:index, :show, :new, :edit, :create, :update]
   resources :product_models, only: [:index , :new, :create, :show]
   resources :orders, only: [:index , :new, :create, :show, :edit, :update, :index]
+
+  namespace :api do 
+    namespace :v1 do 
+      resources :warehouses, only: [:show, :index]
+    end 
+  end
 end
