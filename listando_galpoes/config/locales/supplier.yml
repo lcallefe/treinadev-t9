@@ -1,0 +1,16 @@
+pt-BR:   
+  activerecord:
+    models:
+      supplier: 'Fornecedor'
+    attributes:
+      supplier:
+        corporate_name: 'Razão Social'
+        brand_name: 'Nome Fantasia'
+        registration_number: 'CNPJ'
+        state: 'Estado'
+        full_address: 'Endereço'
+        city: 'Cidade'
+        email: 'E-mail'
+        supplier_id: 'Fornecedor'
+
+        

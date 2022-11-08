@@ -1,0 +1,26 @@
+[
+  {
+    "id": 7,
+    "name": "Galpão da hora",
+    "code": "ABC",
+    "city": "São Paulo",
+    "area": 10000,
+    "created_at": "2022-09-30T03:53:35.474Z",
+    "updated_at": "2022-09-30T03:53:35.474Z",
+    "address": "Rua Caramuru",
+    "cep": "04143-040",
+    "description": "Galpão"
+  },
+  {
+    "id": 8,
+    "name": "Recife",
+    "code": "ABP",
+    "city": "São Bernardo do Campo",
+    "area": 10000,
+    "created_at": "2022-10-02T01:04:49.086Z",
+    "updated_at": "2022-10-02T01:04:49.086Z",
+    "address": "Rua Irineu Ferreira da Silva",
+    "cep": "09621-020",
+    "description": "Galpão de Pernambuco"
+  }
+]

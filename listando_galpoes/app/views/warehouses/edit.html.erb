@@ -1,0 +1,13 @@
+<h1>Atualizar fornecedor</h1>
+<% if @warehouse.errors.full_messages.any? %>
+  <%  @warehouse.errors.full_messages.each do |msg| %>
+    <div><br>
+      <%= msg %>
+    </div>
+  <% end %>
+<% end %>
+<br>
+
+<%= render 'form' %>
+
+ 

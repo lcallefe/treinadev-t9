@@ -1,0 +1,21 @@
+<%= Warehouse.model_name.human%> <%= @warehouse.code %>
+<%= @warehouse.code %>
+<%= Warehouse.human_attribute_name(:name) %>: <%= @warehouse.name %>
+<%= Warehouse.human_attribute_name(:city)%>: <%= @warehouse.city %>
+<%= Warehouse.human_attribute_name(:area)%>: <%= @warehouse.area %> m2
+<%= Warehouse.human_attribute_name(:address)%>: <%= @warehouse.address %> <%=Warehouse.human_attribute_name(:cep)%>: <%= @warehouse.cep %>
+<%= @warehouse.description %>
+
+<div>
+  <%= button_to('Remover', warehouse_path(@warehouse.id), method: :delete) %>
+</div>
+
+<div>
+  <%= link_to 'Editar', edit_warehouse_path %>
+</div>
+
+<div>
+  <%= link_to('Voltar', root_path) %>
+</div>
+
+
