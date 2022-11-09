@@ -1,0 +1,14 @@
+[
+  {
+    "id": 7,
+    "name": "Galpão da hora",
+    "code": "ABC",
+    "city": "São Paulo",
+    "area": 10000,
+    "created_at": "2022-09-30T03:53:35.474Z",
+    "updated_at": "2022-09-30T03:53:35.474Z",
+    "address": "Rua Caramuru",
+    "cep": "04143-040",
+    "description": "Galpão"
+  }
+]

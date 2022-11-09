@@ -74,7 +74,4 @@ describe 'Usuário cadastra um galpão' do
     expect(page).to have_content 'CEP não pode ficar em branco'
     expect(page).to have_content 'Área não pode ficar em branco'
   end 
-
-
-
 end

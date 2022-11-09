@@ -1,12 +1,16 @@
 class Api::V1::WarehousesController < Api::V1::ApiController
   def show 
-    warehouse = Warehouse.find(params[:id])
-    render status: 200, json: warehouse.as_json(except: [:created_at, :updated_at])
+    id = params[:id]
+    response = Faraday.get("http://localhost:4000/api/v1/warehouses/#{id}")
   end
 
   def index 
-    warehouses = Warehouse.all.order(:name)
-    render status: 200, json: warehouses
+    response = Faraday.get("http://localhost:4000/api/v1/warehouses")
+    if response.status == 200 
+      @warehouses = JSON.parse(response.body)
+    else  
+      redirect_to root_path
+    end
   end
 
   def create  

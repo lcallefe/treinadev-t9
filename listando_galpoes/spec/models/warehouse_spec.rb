@@ -1,78 +1,35 @@
 require 'rails_helper'
 
-RSpec.describe Warehouse, type: :model do
-  describe '#valid?' do
-    context 'presence' do
-      it 'falso quando nome está vazio' do
-        warehouse = Warehouse.new(name:'', code: 'RIO', address: 'Endereço',
-                                  cep: '25000-000', city: 'Rio', area: 1000,
-                                  description: 'Alguma descrição')
-        
-        expect(warehouse).not_to be_valid
-      end
-      
-      it 'falso quando código está vazio' do
-        warehouse = Warehouse.new(name:'Rio de Janeiro', code: '', address: 'Endereço',
-                                  cep: '25000-000', city: 'Rio', area: 1000,
-                                  description: 'Alguma descrição')
-        
-          expect(warehouse).not_to be_valid
-        end
-      end
-      it 'falso quando endereço está vazio' do
-        warehouse = Warehouse.new(name:'Rio de Janeiro', code: 'RIO', address: '',
-                                  cep: '25000-000', city: 'Rio', area: 1000,
-                                  description: 'Alguma descrição')
-        
-        expect(warehouse).not_to be_valid
-      end
+describe Warehouse do 
+  context '.all' do 
+    it 'deve listar todos os galpões' do 
+      json_data = File.read(Rails.root.join('spec/support/json/warehouses.json'))
+      fake_response = double("faraday_response", status:200, body:json_data)
+
+      allow(Faraday).to receive(:get).with('http://localhost:4000/api/v1/warehouses').and_return(fake_response)
+
+      result = Warehouse.all 
+
+      expect(result.length).to eq 2 
+      expect(result.id).to eq 1 
+      expect(result[0].name).to eq 'Aeroporto SP' 
+      expect(result[0].code).to eq 'GRU' 
+      expect(result[0].city).to eq 'Guarulhos' 
+      expect(result[0].area).to eq 100000
+      expect(result[0].cep).to eq '15000-000' 
+      expect(result[0].description).to eq 'Galpão destinado para cargas internacionais' 
+      expect(result[1].name).to eq 'Galpao Maceio' 
+      expect(result[1].code).to eq 'MCZ' 
     end
-    context 'uniqueness' do
-      it 'falso quando código já está em uso' do
-        warehouse = Warehouse.create(name:'Rio de Janeiro', code: 'RIO', address: 'Endereço',
-                                  cep: '25000-000', city: 'Rio', area: 1000,
-                                  description: 'Alguma descrição')
-        second_warehouse = Warehouse.new(name:'Angra dos Reis', code: 'RIO', address: 'Endereço',
-                                         cep: '25000-000', city: 'Rio', area: 1000,
-                                         description: 'Alguma descrição')
 
-        expect(second_warehouse).not_to be_valid
+    it 'deve retornar vazio se a API estiver indisponível' do 
 
-      end
-      it 'falso quando nome já está em uso' do
-        warehouse = Warehouse.create(name:'Angra dos Reis', code: 'ANG', address: 'Endereço',
-                                  cep: '25000-000', city: 'Rio', area: 1000,
-                                  description: 'Alguma descrição')
-        second_warehouse = Warehouse.new(name:'Angra dos Reis', code: 'RIO', address: 'Endereço',
-                                         cep: '25000-000', city: 'Rio', area: 2000,                                         description: 'Alguma descrição')
-        expect(second_warehouse).not_to be_valid
-      end
+      fake_response = double("faraday_resp", status:500, body:"{'error':'Erro ao obter dados'}")
+      allow(Faraday).to receive(:get).with('http://localhost:4000/api/v1/warehouses').and_return(fake_response)
+
+      result = Warehouse.all
+
+      expect(result).to eq []
     end
-    context 'format' do
-      it 'falso quando CEP não corresponde ao formato "00000-000"' do
-        warehouse = Warehouse.new(name:'Angra dos Reis', code: 'RIO', address: 'Endereço',
-                                  cep: '25000-0000', city: 'Rio', area: 2000,
-                                  description: 'Alguma descrição')                                            
-          expect(warehouse).not_to be_valid
-      end
-      it 'falso quando código não corresponde ao formato AAA' do
-        warehouse = Warehouse.new(name:'Angra dos Reis', code: 'ANGRA', address: 'Endereço',
-                                  cep: '25000-0000', city: 'Rio', area: 2000,
-                                  description: 'Alguma descrição')                                                           
-        expect(warehouse).not_to be_valid
-      end
-    end
-  describe '#full_description' do
-    it 'exibe o nome e o código' do
-      # Arrange
-      w = Warehouse.new(name: 'Galpão Cuiaba', code: 'CBA', )
-      # Act
-      result = w.full_description
-
-      # Assert
-      expect(result).to eq ('CBA - Galpão Cuiaba')
-    end 
-
   end
-  
-  end
+end
